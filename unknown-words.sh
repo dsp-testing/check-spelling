@@ -1064,7 +1064,8 @@ define_variables() {
   action_workflow_path_file="$(mktemp)"
   workflow_path=$(get_workflow_path)
   load_env
-  GITHUB_TOKEN="${GITHUB_TOKEN:-"$INPUT_GITHUB_TOKEN"}"
+  GITHUB_TOKEN="${GITHUB_TOKEN:-"${INPUT_GITHUB_TOKEN:-"$DEFAULT_GITHUB_TOKEN"}"}"
+  DEFAULT_GITHUB_TOKEN=''
   if [ -n "$GITHUB_TOKEN" ]; then
     export AUTHORIZATION_HEADER="Authorization: token $GITHUB_TOKEN"
   else
